@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Everything is Saksham — AI Agent Builder</title>
+<style>
+:root{--bg:#070912;--surface:#0e1122;--elevated:#161a2e;--border:#232842;--brand:#6246f5;--accent:#23e5b5;--text:#f2f4fb;--muted:#9aa2c0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1100px;margin:auto;padding:20px}.top{position:sticky;top:0;background:#070912dd;backdrop-filter:blur(14px);border-bottom:1px solid var(--border);z-index:5}
+.nav{height:64px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:800;display:flex;align-items:center;gap:10px}.mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--accent));color:#05121a}
+nav{display:flex;gap:8px}button{font:inherit;cursor:pointer;border:0;color:inherit}.btn{padding:11px 17px;border-radius:12px;background:var(--elevated);border:1px solid var(--border);font-weight:700}.primary{background:var(--brand);border-color:var(--brand)}
+.hero{padding:85px 20px 65px;text-align:center;background:radial-gradient(700px 400px at 15% 0,#6246f544,transparent 60%),radial-gradient(650px 350px at 90% 5%,#23e5b533,transparent 60%)}
+h1{font-size:clamp(2.5rem,7vw,4.8rem);line-height:1.02;margin:15px 0}.gradient{background:linear-gradient(100deg,#fff,var(--brand),var(--accent));-webkit-background-clip:text;color:transparent}
+.lead{max-width:700px;margin:20px auto;color:var(--muted);font-size:18px}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:28px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:linear-gradient(160deg,#ffffff0d,#ffffff03);border:1px solid var(--border);border-radius:20px;padding:24px}.icon{font-size:30px}
+section{padding:55px 20px}h2{text-align:center;font-size:2rem;margin:0 0 30px}.muted{color:var(--muted)}
+.price{font-size:32px;font-weight:800;margin:12px 0}.tag{display:inline-block;padding:5px 9px;border-radius:8px;background:#23e5b522;color:var(--accent);font-size:12px;font-weight:700}
+.modalbg{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:20px;z-index:20}.modal{max-width:460px;width:100%;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:25px}
+input{width:100%;padding:13px;margin:7px 0 15px;background:var(--elevated);border:1px solid var(--border);border-radius:11px;color:white}.close{float:right}
+#dashboard{display:none}
+@media(max-width:700px){.grid{grid-template-columns:1fr}nav .hide{display:none}.hero{padding-top:55px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap nav">
+<div class="logo"><span class="mark">S</span> Everything is Saksham</div>
+<nav><button class="btn hide" onclick="document.getElementById('features').scrollIntoView()">Features</button><button class="btn hide" onclick="document.getElementById('pricing').scrollIntoView()">Pricing</button><button class="btn primary" onclick="openLogin()">Login</button></nav>
+</div></header>
+
+<main id="landing">
+<section class="hero">
+<span class="tag">AI AGENT BUILDER</span>
+<h1>Build an AI Agent.<br><span class="gradient">Automate your work.</span></h1>
+<p class="lead">Create your own AI agent and connect your business tools — all from one simple dashboard.</p>
+<div class="actions"><button class="btn primary" onclick="openLogin()">Build My AI Agent →</button><button class="btn" onclick="document.getElementById('pricing').scrollIntoView()">View Plans</button></div>
+<p class="muted">First trial free • Starting at ₹99/month</p>
+</section>
+
+<section id="features"><h2>Everything your agent needs</h2><div class="wrap grid">
+<div class="card"><div class="icon">🤖</div><h3>AI Agent Builder</h3><p class="muted">Create an agent with custom instructions, personality and business knowledge.</p></div>
+<div class="card"><div class="icon">🔗</div><h3>Connect Your Apps</h3><p class="muted">Prepare integrations for WhatsApp, Instagram, Gmail, Google Maps and OpenAI.</p></div>
+<div class="card"><div class="icon">⚡</div><h3>Automate Work</h3><p class="muted">Let your agent handle repetitive customer and business tasks.</p></div>
+</div></section>
+
+<section id="pricing"><h2>Simple pricing</h2><div class="wrap grid">
+<div class="card"><h3>Monthly</h3><div class="price">₹99</div><p class="muted">per month</p><button class="btn primary" onclick="openLogin()">Start</button></div>
+<div class="card"><h3>6 Months</h3><div class="price">₹499</div><p class="muted">6-month access</p><button class="btn primary" onclick="openLogin()">Choose</button></div>
+<div class="card"><span class="tag">BEST VALUE</span><h3>Yearly</h3><div class="price">₹799</div><p class="muted">+ 2 months trial free</p><button class="btn primary" onclick="openLogin()">Choose</button></div>
+</div></section>
+</main>
+
+<section id="dashboard" class="wrap">
+<h2 style="text-align:left">Your AI Agent Dashboard</h2>
+<div class="card">
+<h3>Welcome 👋</h3><p class="muted">Your dashboard is ready. Create your first AI agent.</p>
+<button class="btn primary" onclick="createAgent()">＋ Create AI Agent</button>
+<div id="agentResult"></div>
+</div>
+</section>
+
+<div id="login" class="modalbg" onclick="if(event.target===this)closeLogin()"><div class="modal">
+<button class="btn close" onclick="closeLogin()">✕</button><h2 style="text-align:left">Login / Sign up</h2>
+<p class="muted">Use your email to enter the demo dashboard.</p>
+<label>Email</label><input id="email" type="email" placeholder="you@example.com">
+<label>Password</label><input id="password" type="password" placeholder="••••••••">
+<button class="btn primary" style="width:100%" onclick="login()">Continue →</button>
+<p id="loginMsg" class="muted"></p>
+</div></div>
+
+<script>
+function openLogin(){document.getElementById('login').style.display='grid'}
+function closeLogin(){document.getElementById('login').style.display='none'}
+function login(){
+ const e=document.getElementById('email').value.trim(),p=document.getElementById('password').value;
+ if(!e||!p){document.getElementById('loginMsg').textContent='Please enter email and password.';return}
+ localStorage.setItem('saksham_demo_user',e);closeLogin();
+ document.getElementById('landing').style.display='none';document.getElementById('dashboard').style.display='block';
+ window.scrollTo(0,0);
+}
+function createAgent(){
+ document.getElementById('agentResult').innerHTML='<div class="card" style="margin-top:20px"><span class="tag">DRAFT</span><h3>My First AI Agent</h3><p class="muted">Agent created successfully in demo mode.</p><button class="btn" onclick="alert(\\'Next step: configure your agent instructions and integrations.\\')">Configure Agent</button></div>';
+}
+</script>
+</body>
+</html>
